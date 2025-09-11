@@ -1,0 +1,57 @@
+/* Auth Callback Component Styles */
+
+.auth-callback-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #87ceeb 0%, #4682b4 50%, #2c5282 100%);
+  padding: 2rem;
+}
+
+.auth-callback-content {
+  background: white;
+  border-radius: 12px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+}
+
+.auth-callback-content h2 {
+  color: #2c5282;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.auth-callback-content p {
+  color: #4a5568;
+  margin-bottom: 1rem;
+  line-height: 1.6;
+}
+
+.error-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .auth-callback-container {
+    padding: 1rem;
+  }
+  
+  .auth-callback-content {
+    padding: 2rem 1.5rem;
+  }
+  
+  .auth-callback-content h2 {
+    font-size: 1.25rem;
+  }
+  
+  .error-icon {
+    font-size: 2.5rem;
+  }
+}
