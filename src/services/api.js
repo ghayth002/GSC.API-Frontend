@@ -858,9 +858,17 @@ class ApiClient {
 
   async createBoiteMedicale(boiteData) {
     try {
+      console.log("API: Creating boite medicale with data:", boiteData);
       const response = await api.post("/api/boitesmedicales", boiteData);
+      console.log("API: Boite medicale created successfully:", response.data);
       return response.data;
     } catch (error) {
+      console.error("API: Error creating boite medicale:", {
+        status: error.response?.status,
+        data: error.response?.data,
+        message: error.message,
+      });
+      console.error("API: Full error response:", error.response?.data);
       throw this.handleError(error);
     }
   }
@@ -885,11 +893,36 @@ class ApiClient {
 
   async assignBoiteToVol(boiteId, volId) {
     try {
-      const response = await api.post(
-        `/api/boitesmedicales/${boiteId}/assign-to-vol/${volId}`
+      console.log(
+        `Assigning boite ${boiteId} to vol ${volId} using correct API endpoint`
       );
+
+      // Use the correct endpoint as identified in the backend API
+      const createVolBoiteDto = {
+        volId: parseInt(volId),
+        boiteMedicaleId: parseInt(boiteId),
+      };
+
+      console.log("Sending CreateVolBoiteMedicaleDto:", createVolBoiteDto);
+
+      const response = await api.post(
+        `/api/boitesmedicales/${boiteId}/assign-to-vol/${volId}`,
+        createVolBoiteDto,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("✅ Assignment successful:", response.data);
       return response.data;
     } catch (error) {
+      console.error("Assignment failed:", {
+        status: error.response?.status,
+        statusText: error.response?.statusText,
+        data: error.response?.data,
+      });
       throw this.handleError(error);
     }
   }

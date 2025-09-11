@@ -19,6 +19,13 @@ import UserManagement from "./components/UserManagement/UserManagement";
 import FlightManagement from "./components/FlightManagement";
 import MenuManagement from "./components/MenuManagement";
 import ArticleManagement from "./components/ArticleManagement";
+import PlansHebergementManagement from "./components/PlansHebergementManagement";
+import BCPManagement from "./components/BCPManagement";
+import BLManagement from "./components/BLManagement";
+import EcartsManagement from "./components/EcartsManagement";
+import BoitesMedicalesManagement from "./components/BoitesMedicalesManagement";
+import DossiersVolManagement from "./components/DossiersVolManagement";
+import RapportsBudgetairesManagement from "./components/RapportsBudgetairesManagement";
 import ModulePlaceholder from "./components/Placeholder/ModulePlaceholder";
 import LoadingDemo from "./components/LoadingDemo/LoadingDemo";
 import "./styles/global.css";
@@ -198,12 +205,60 @@ const App = () => {
                 }
               />
 
+              {/* Plans d'Hébergement Management */}
+              <Route
+                path="/dashboard/plans-hebergement"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard>
+                      <PlansHebergementManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* BCP Management */}
+              <Route
+                path="/dashboard/bcp"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard>
+                      <BCPManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* BL Management */}
+              <Route
+                path="/dashboard/bl"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard>
+                      <BLManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* Écarts Management */}
+              <Route
+                path="/dashboard/ecarts"
+                element={
+                  <ProtectedRoute>
+                    <Dashboard>
+                      <EcartsManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+
               <Route
                 path="/dashboard/budget"
                 element={
                   <ProtectedRoute requiredRoles={["Administrator", "Manager"]}>
                     <Dashboard>
-                      <ModulePlaceholder {...moduleConfigs.budget} />
+                      <RapportsBudgetairesManagement />
                     </Dashboard>
                   </ProtectedRoute>
                 }
@@ -221,12 +276,13 @@ const App = () => {
                 }
               />
 
+              {/* Dossiers de Vol Management */}
               <Route
-                path="/dashboard/flight-file"
+                path="/dashboard/dossiers-vol"
                 element={
                   <ProtectedRoute>
                     <Dashboard>
-                      <ModulePlaceholder {...moduleConfigs["flight-file"]} />
+                      <DossiersVolManagement />
                     </Dashboard>
                   </ProtectedRoute>
                 }
@@ -265,23 +321,25 @@ const App = () => {
                 }
               />
 
+              {/* Boîtes Médicales Management */}
               <Route
                 path="/dashboard/medical"
                 element={
                   <ProtectedRoute>
                     <Dashboard>
-                      <ModulePlaceholder {...moduleConfigs.medical} />
+                      <BoitesMedicalesManagement />
                     </Dashboard>
                   </ProtectedRoute>
                 }
               />
 
+              {/* Rapports Budgétaires Management */}
               <Route
                 path="/dashboard/reports"
                 element={
                   <ProtectedRoute requiredRoles={["Administrator", "Manager"]}>
                     <Dashboard>
-                      <ModulePlaceholder {...moduleConfigs.reports} />
+                      <RapportsBudgetairesManagement />
                     </Dashboard>
                   </ProtectedRoute>
                 }
