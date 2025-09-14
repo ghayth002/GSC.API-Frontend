@@ -1193,6 +1193,245 @@ class ApiClient {
     }
   }
 
+  // Demandes Menu methods
+  async getDemandes(filters = {}) {
+    try {
+      const params = new URLSearchParams(filters);
+      const response = await api.get(`/api/demandes?${params}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getDemandeById(id) {
+    try {
+      const response = await api.get(`/api/demandes/${id}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async createDemande(demandeData) {
+    try {
+      console.log("🍽️ Creating demande with data:", demandeData);
+      console.log(
+        "🔍 Detailed data structure:",
+        JSON.stringify(demandeData, null, 2)
+      );
+
+      // Log the final payload being sent
+      console.log(
+        "📤 Final request payload:",
+        JSON.stringify(demandeData, null, 2)
+      );
+      const response = await api.post("/api/demandes", demandeData);
+      return response.data;
+    } catch (error) {
+      console.error("❌ Error creating demande:", error.response?.data);
+      console.error("❌ Full error response:", error.response);
+      console.error("❌ Validation errors:", error.response?.data?.errors);
+
+      // Log detailed validation error messages
+      if (error.response?.data?.errors) {
+        Object.keys(error.response.data.errors).forEach((key) => {
+          console.error(`❌ Field ${key}:`, error.response.data.errors[key]);
+        });
+      }
+      throw this.handleError(error);
+    }
+  }
+
+  async updateDemande(id, demandeData) {
+    try {
+      const response = await api.put(`/api/demandes/${id}`, demandeData);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async deleteDemande(id) {
+    try {
+      const response = await api.delete(`/api/demandes/${id}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async assignDemandeToFournisseur(id, assignData) {
+    try {
+      const response = await api.post(`/api/demandes/${id}/assign`, assignData);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async acceptDemandeReponse(reponseId, commentaire = "") {
+    try {
+      const response = await api.post(
+        `/api/demandes/reponses/${reponseId}/accept`,
+        commentaire,
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  // Fournisseurs methods
+  async getFournisseurs(filters = {}) {
+    try {
+      const params = new URLSearchParams(filters);
+      const response = await api.get(`/api/fournisseurs?${params}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getFournisseurById(id) {
+    try {
+      const response = await api.get(`/api/fournisseurs/${id}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async createFournisseur(fournisseurData) {
+    try {
+      const response = await api.post("/api/fournisseurs", fournisseurData);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async updateFournisseur(id, fournisseurData) {
+    try {
+      const response = await api.put(
+        `/api/fournisseurs/${id}`,
+        fournisseurData
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async deleteFournisseur(id) {
+    try {
+      const response = await api.delete(`/api/fournisseurs/${id}`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async verifyFournisseur(id) {
+    try {
+      const response = await api.post(`/api/fournisseurs/${id}/verify`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getMesDemandesAssignees(filters = {}) {
+    try {
+      const params = new URLSearchParams(filters);
+      const response = await api.get(
+        `/api/fournisseurs/mes-demandes?${params}`
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async repondreADemande(demandeId, reponseData) {
+    try {
+      const response = await api.post(
+        `/api/fournisseurs/demandes/${demandeId}/repondre`,
+        reponseData
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  // Vol Menus methods
+  async getAvailableMenusForVol(volId) {
+    try {
+      const response = await api.get(`/api/vols/${volId}/menus/available`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async assignMenuToVol(volId, menuId, assignData) {
+    try {
+      const response = await api.post(
+        `/api/vols/${volId}/menus/${menuId}/assign`,
+        assignData
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getVolMenus(volId) {
+    try {
+      const response = await api.get(`/api/vols/${volId}/menus`);
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async generateBCPFromMenus(volId) {
+    try {
+      const response = await api.post(
+        `/api/bonscommandeprevisionnel/generate-from-menus/${volId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async getMenuStatisticsForVol(volId) {
+    try {
+      const response = await api.get(
+        `/api/bonscommandeprevisionnel/menu-statistics/${volId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
+  async unassignMenuFromVol(volId, assignmentId) {
+    try {
+      const response = await api.delete(
+        `/api/vols/${volId}/menus/${assignmentId}`
+      );
+      return response.data;
+    } catch (error) {
+      throw this.handleError(error);
+    }
+  }
+
   // Error handler
   handleError(error) {
     if (error.response) {
@@ -1217,4 +1456,7 @@ class ApiClient {
   }
 }
 
-export default new ApiClient();
+const apiClient = new ApiClient();
+
+export { apiClient };
+export default apiClient;

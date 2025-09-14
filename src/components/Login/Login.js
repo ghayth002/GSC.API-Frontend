@@ -328,6 +328,16 @@ const Login = () => {
             </Link>
           </div>
 
+          <div className="supplier-login-section">
+            <div className="separator">
+              <span>ou</span>
+            </div>
+            <Link to="/fournisseur-login" className="supplier-login-button">
+              <span className="supplier-icon">🏪</span>
+              Connexion Fournisseur
+            </Link>
+          </div>
+
           <div className="login-footer">
             <p>© 2024 Tunisair - Aviation IT Services Africa</p>
           </div>

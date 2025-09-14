@@ -49,6 +49,35 @@ const Dashboard = ({ children }) => {
       icon: "📦",
       roles: ["Administrator", "Manager", "User"],
     },
+    // New Menu Request System
+    {
+      id: "demandes",
+      label: "Demandes de Menus",
+      path: "/dashboard/demandes",
+      icon: "📋",
+      roles: ["Administrator", "Manager"],
+    },
+    {
+      id: "fournisseurs",
+      label: "Gestion Fournisseurs",
+      path: "/dashboard/fournisseurs",
+      icon: "🏪",
+      roles: ["Administrator", "Manager"],
+    },
+    {
+      id: "vol-menus",
+      label: "Affectation Menus Vols",
+      path: "/dashboard/vol-menus",
+      icon: "✈️",
+      roles: ["Administrator", "Manager"],
+    },
+    {
+      id: "fournisseur-dashboard",
+      label: "Mes Demandes",
+      path: "/dashboard/fournisseur",
+      icon: "🏪",
+      roles: ["Fournisseur"],
+    },
     {
       id: "budget",
       label: "Génération de l'état budgétaire & des prévisions",

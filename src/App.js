@@ -26,6 +26,12 @@ import EcartsManagement from "./components/EcartsManagement";
 import BoitesMedicalesManagement from "./components/BoitesMedicalesManagement";
 import DossiersVolManagement from "./components/DossiersVolManagement";
 import RapportsBudgetairesManagement from "./components/RapportsBudgetairesManagement";
+// Menu Request System Components
+import DemandesManagement from "./components/DemandesManagement";
+import FournisseursManagement from "./components/FournisseursManagement";
+import FournisseurDashboard from "./components/FournisseurDashboard";
+import VolMenusManagement from "./components/VolMenusManagement";
+import FournisseurLogin from "./components/FournisseurLogin";
 import ModulePlaceholder from "./components/Placeholder/ModulePlaceholder";
 import LoadingDemo from "./components/LoadingDemo/LoadingDemo";
 import "./styles/global.css";
@@ -154,6 +160,7 @@ const App = () => {
             <Routes>
               {/* Public Routes */}
               <Route path="/login" element={<Login />} />
+              <Route path="/fournisseur-login" element={<FournisseurLogin />} />
               <Route path="/register" element={<Register />} />
               <Route path="/verify-email" element={<EmailVerification />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -340,6 +347,48 @@ const App = () => {
                   <ProtectedRoute requiredRoles={["Administrator", "Manager"]}>
                     <Dashboard>
                       <RapportsBudgetairesManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+
+              {/* New Menu Request System Routes */}
+              <Route
+                path="/dashboard/demandes"
+                element={
+                  <ProtectedRoute requiredRoles={["Administrator", "Manager"]}>
+                    <Dashboard>
+                      <DemandesManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/fournisseurs"
+                element={
+                  <ProtectedRoute requiredRoles={["Administrator", "Manager"]}>
+                    <Dashboard>
+                      <FournisseursManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/vol-menus"
+                element={
+                  <ProtectedRoute requiredRoles={["Administrator", "Manager"]}>
+                    <Dashboard>
+                      <VolMenusManagement />
+                    </Dashboard>
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/dashboard/fournisseur"
+                element={
+                  <ProtectedRoute requiredRoles={["Fournisseur"]}>
+                    <Dashboard>
+                      <FournisseurDashboard />
                     </Dashboard>
                   </ProtectedRoute>
                 }

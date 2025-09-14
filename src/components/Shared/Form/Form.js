@@ -12,6 +12,7 @@ const Form = ({
   showCancel = true,
   validationSchema = {},
   className = "",
+  children,
 }) => {
   const [values, setValues] = useState(initialValues);
   const [errors, setErrors] = useState({});
@@ -313,6 +314,8 @@ const Form = ({
   return (
     <form onSubmit={handleSubmit} className={`gsc-form ${className}`}>
       {fields.map(renderField)}
+
+      {children}
 
       <div className="form-actions">
         {showCancel && (
